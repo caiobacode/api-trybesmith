@@ -13,14 +13,14 @@ async function postUser(user: IUser): Promise<IResponse> {
   return { type: 201, data: { token } };
 }
 
-async function serviceLogin(loginInfo: ILogin): Promise<IResponse> {
-  const { username, password } = loginInfo;
-  const allUsers = await getUser(loginInfo);
-  if (allUsers.length === 0) {
+async function serviceLogin({ username, password }: ILogin): Promise<IResponse> {
+  const actualUser = await getUser({ username, password });
+
+  if (actualUser.length === 0) {
     return { type: 401, data: { message: 'Username or password invalid' } };
   }
-  const payload = { username, password };
-  const token = jwt.sign(payload, JWT_SECRET as string);
+  
+  const token = jwt.sign({ username, password }, JWT_SECRET as string);
 
   return { type: 200, data: { token } };
 }
