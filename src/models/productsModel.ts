@@ -14,3 +14,9 @@ export async function getProducts(): Promise<IProduct[]> {
   const [result] = await connection.execute<IProduct[] & RowDataPacket[]>(query);
   return result;
 }
+
+export async function updateProduct(id: number, orderId: number): Promise<IProduct[]> {
+  const query = 'UPDATE Trybesmith.products SET order_id = ? WHERE id = ?';
+  const [result] = await connection.execute<IProduct[] & RowDataPacket[]>(query, [orderId, id]);
+  return result;
+}

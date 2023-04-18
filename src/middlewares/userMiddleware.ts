@@ -33,7 +33,7 @@ async function authUserFields(req: Request, res: Response, next: NextFunction) {
     return res.status(type).json({ message });
   }
 
-  if (authString(vocation, 'vocation', 8).type !== 200) {
+  if (authString(vocation, 'vocation', 3).type !== 200) {
     const { type, message } = authString(vocation, 'vocation', 3);
     return res.status(type).json({ message });
   }

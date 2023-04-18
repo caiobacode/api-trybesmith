@@ -8,7 +8,8 @@ const { JWT_SECRET } = process.env;
 
 async function postUser(user: IUser): Promise<IResponse> {
   const newUser = await createUser(user);
-  const token = jwt.sign(newUser.username, JWT_SECRET as string);
+  const payload = { username: newUser.username, password: newUser.password };
+  const token = jwt.sign(payload, JWT_SECRET as string);
 
   return { type: 201, data: { token } };
 }
