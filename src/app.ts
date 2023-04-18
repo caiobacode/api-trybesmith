@@ -1,6 +1,6 @@
 import express from 'express';
 import { insertProduct, getProducts } from './controllers/productsController';
-import insertUser from './controllers/usersController';
+import { insertUser, login } from './controllers/usersController';
 import getOrders from './controllers/ordersController';
 
 const app = express();
@@ -14,6 +14,8 @@ app.get('/products', getProducts);
 app.post('/users', insertUser);
 
 app.get('/orders', getOrders);
+
+app.post('/login', login);
 
 // starting
 

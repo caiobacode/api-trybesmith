@@ -1,14 +1,28 @@
 import jwt from 'jsonwebtoken';
 import IUser from '../interfaces/usersInterfaces';
-import createUser from '../models/usersModel';
+import ILogin from '../interfaces/loginInterfaces';
+import IResponse from '../interfaces/responseInterfaces';
+import { createUser, getUser } from '../models/usersModel';
 
 const { JWT_SECRET } = process.env;
 
-async function postUser(user: IUser): Promise<{ type: number, data: { token: string } }> {
+async function postUser(user: IUser): Promise<IResponse> {
   const newUser = await createUser(user);
   const token = jwt.sign(newUser.username, JWT_SECRET as string);
 
   return { type: 201, data: { token } };
 }
 
-export default postUser;
+async function serviceLogin(loginInfo: ILogin): Promise<IResponse> {
+  const { username, password } = loginInfo;
+  const allUsers = await getUser(loginInfo);
+  if (allUsers.length === 0) {
+    return { type: 401, data: { message: 'Username or password invalid' } };
+  }
+  const payload = { username, password };
+  const token = jwt.sign(payload, JWT_SECRET as string);
+
+  return { type: 200, data: { token } };
+}
+
+export { postUser, serviceLogin };
