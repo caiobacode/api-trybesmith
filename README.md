@@ -35,10 +35,10 @@
     
 ```bash
 # Clone the repo
-git clone git@github.com:caiobacode/api-store-manager.git
+git clone https://github.com/caiobacode/api-trybesmith.git
 
 # Enter in repo
-cd api-store-manager
+cd api-trybesmith
 
 # Run DockerCompose
 docker-compose up -d
@@ -50,10 +50,10 @@ docker-compose up -d
 
 ```bash
 # Clone the repo
-git clone https://github.com/caiobacode/api-talker-manager.git
+git clone https://github.com/caiobacode/api-trybesmith.git
 
 # Enter in repo
-cd api-talker-manager
+cd api-trybesmith
 
 # Install dependencies
 npm install
